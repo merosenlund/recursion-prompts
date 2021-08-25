@@ -128,34 +128,51 @@ var isEven = function(n) {
   // 2. Must now the difference between negative and positive number
 // Edge Cases: If number is negative move up to zero, if number is positive move down to zero
 var sumBelow = function(n) {
-  // Create a sum variable and set it to zero
   var sum = 0;
-  // If n is less than 0
   if (n < 0) {
-    // Set the sum to n + 1
     sum += n + 1;
-  // Else if n is greater than 0
   } else if (n > 0)
-    // Set the sum to n - 1
     sum += n -1;
-  // Base case, If sum equals zero
   if (sum === 0) {
-    // Return sum
     return sum;
-    // If n is greater than 1
   } else if (n > 1) {
-    // Call sumBelow with n - 1 and add the return value to sum and return it
     return sum + sumBelow(n - 1);
-  // Else if n is less than -1
   } else if (n < -1) {
-    // Call sumBelow with n + 1 and add the return value to sum
     return sum + sumBelow(n + 1);
   }
 };
 
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
+// Inputs:
+  // 1. A number to start the range after
+  // 2. A number to end the range before
+// Outputs: an array of numbers that fall between the input numbers
+// Constraints:
+  // 1. Should accept negative integers
+  // 2. Should accept starting integers that are larger than ending integers
+// Edge Cases:
+  // 1. Return an empty array if no integers in range
 var range = function(x, y) {
+  if (x - y > -2 && x - y < 2) {
+    return [];
+  }
+  var newX;
+  var newY;
+  if (y > x) {
+    newX = x + 1;
+    newY = y - 1;
+  } else {
+    newX = x - 1;
+    newY = y + 1;
+  }
+  if (newX === newY) {
+    return [newX];
+  }
+  var result = range(newX, newY);
+  result.unshift(newX);
+  result.push(newY);
+  return result;
 };
 
 // 7. Compute the exponent of a number.
