@@ -232,8 +232,10 @@
       });
 
       it('should return true for even numbers', function() {
-        expect(isEven(48)).to.be.true;
-        expect(isEven(0)).to.be.true;
+        var isItEven = isEven(48);
+        var pleaseTellMeItIsEven = isEven(0);
+        expect(isItEven).to.be.true;
+        expect(pleaseTellMeItIsEven).to.be.true;
       });
 
       it('should return false for odd numbers', function() {

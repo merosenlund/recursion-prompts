@@ -6,27 +6,151 @@
 // denoted by n!, is the product of all positive integers less than or equal to n.
 // Example: 5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5); // 120
+// Inputs: A number
+// Outputs: The factorial of the input number
+// Constraints: None
+// Edge Cases: Return null for negative numbers
 var factorial = function(n) {
+  if (n < 0) {
+    return null;
+  }
+  if (n === 0) {
+    return 1;
+  }
+  return n * factorial(n - 1);
 };
 
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
+// Inputs: An array of numbers
+// Outputs: The sum of all numbers in the input array
+// Constraints: None
+// Edgecases:
+  // 1. Should return 0 for an empty array
 var sum = function(array) {
+  if (array.length === 0) {
+    return 0;
+  } else if (typeof array === 'number') {
+    return array;
+  }
+  var total = 0;
+  array.forEach(function(item) {
+    total += sum(item);
+  });
+  return total;
 };
 
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
+// Inputs: An array of number (May contain nested arrays)
+// Outputs: The sum of all numbers in the array
+// Constraints: None
+// Edge Cases: Return zero for an empty array
 var arraySum = function(array) {
+  if (array.length === 0) {
+    return 0;
+  } else if (typeof array === 'number') {
+    return array;
+  }
+  var total = 0;
+  array.forEach(function(item) {
+    total += arraySum(item);
+  });
+  return total;
 };
 
 // 4. Check if a number is even.
+// Input: A number
+// Output: A boolean saying whether the number is even
+// Constraints: Can't use the modulo operator
+// Edge Cases: None
 var isEven = function(n) {
+
+  // Attempt #3 (Based off of this https://stackoverflow.com/questions/44423482/recursively-checking-for-odd-or-even)
+
+  n = Math.abs(n);
+
+  var isOdd = function(n) {
+    return !isEven(n);
+  }
+
+  if (n === 0) {
+    return true;
+  } else {
+    return isOdd(n - 1);
+  }
+
+
+  // Attempt #2
+
+  // // Create a result variable and set it to false
+  // var result = false;
+  // // if n equals -2, 0, or 2
+  // if (Math.floor(n / 2) * 2 === n) {
+  //   // set the result to true
+  //   result = true;
+  // // Else if n is less than -2 and greater than 2
+  // } else if (n < -2 || n > 2) {
+  //   // Set the result to return value of calling isEven with n divided by 2 as the argument
+  //   result = isEven(n / 2);
+  // }
+  // // Return result
+  // return result;
+
+
+  // Attempt #1
+
+  // // Create an is even variable and set it to false
+  // var result = false;
+  // // If n is zero
+  // var innerFunction = function(n) {
+  //   if ((n === 0 || n === 2 || n === -2)) {
+  //     // Set is even to true
+  //     result = true;
+  //   // Else
+  //   } else if (n < -2 || n > 2) {
+  //     // Set is even to the return value of calling the isEven function with n divided by 2
+  //     innerFunction(n / 2);
+  //   }
+  // }
+  // innerFunction(n);
+  // // Return is even
+  // return result;
 };
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
+// Inputs: An number to add up all the numbers lower than it
+// Outputs: The sum of all the numbers lower than the input number and greater than zero
+// Constraints:
+  // 1. Must use recursion,
+  // 2. Must now the difference between negative and positive number
+// Edge Cases: If number is negative move up to zero, if number is positive move down to zero
 var sumBelow = function(n) {
+  // Create a sum variable and set it to zero
+  var sum = 0;
+  // If n is less than 0
+  if (n < 0) {
+    // Set the sum to n + 1
+    sum += n + 1;
+  // Else if n is greater than 0
+  } else if (n > 0)
+    // Set the sum to n - 1
+    sum += n -1;
+  // Base case, If sum equals zero
+  if (sum === 0) {
+    // Return sum
+    return sum;
+    // If n is greater than 1
+  } else if (n > 1) {
+    // Call sumBelow with n - 1 and add the return value to sum and return it
+    return sum + sumBelow(n - 1);
+  // Else if n is less than -1
+  } else if (n < -1) {
+    // Call sumBelow with n + 1 and add the return value to sum
+    return sum + sumBelow(n + 1);
+  }
 };
 
 // 6. Get the integers within a range (x, y).
