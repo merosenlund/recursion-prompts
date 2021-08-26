@@ -222,7 +222,26 @@ var powerOfTwo = function(n) {
 };
 
 // 9. Write a function that reverses a string.
+// Inputs: A string to be reversed
+// Outputs: A reverse of the input string
+// Constraints: None
+// Edge Cases: None
 var reverse = function(string) {
+  // If the length of string is one
+  if (string.length === 1) {
+    // Return the string
+    return string;
+  }
+  // Get the first letter of the string
+  var firstLetter = string.slice(0, 1);
+  // Get the remainder of the string
+  var remainder = string.slice(1);
+  // Create a reversed variable and store it as the output of reversed with the remainder input
+  var reversed = reverse(remainder);
+  // Add the first letter to the end of reversed
+  reversed += firstLetter;
+  // Return reversed
+  return reversed;
 };
 
 // 10. Write a function that determines if a string is a palindrome.
