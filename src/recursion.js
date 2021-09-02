@@ -342,14 +342,29 @@ var divide = function(x, y) {
   return result;
 };
 
-console.log(divide(-79, 82));
-
 // 14. Find the greatest common divisor (gcd) of two positive numbers. The GCD of two
 // integers is the greatest integer that divides both x and y with no remainder.
 // gcd(4,36); // 4
 // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
+// Inputs: Two numbers to find the gcd of
+// Outputs: The gcd of the two numbers
+// Constraints: None
+// Edge Cases: Return null for negative integers
 var gcd = function(x, y) {
+  if (x < 0 || y < 0) {
+    return null;
+  }
+  if (x === 0) {
+    return y;
+  }
+  if (y === 0) {
+    return x;
+  }
+  var greater = x > y ? x : y;
+  var lesser = x < y ? x : y;
+  var remainder = modulo(greater, lesser);
+  return gcd(lesser, remainder);
 };
 
 // 15. Write a function that compares each character of two strings and returns true if
