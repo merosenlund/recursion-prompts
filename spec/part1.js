@@ -1326,7 +1326,20 @@
       });
 
       beforeEach(function() {
-        input = {e:{x:'y'},t:{r:{e:'r'},p:{y:'r'}},y:'e'};
+        input = {
+          e:{
+            x:'y'
+          },
+          t:{
+            r:{
+              e:'r'
+            },
+            p:{
+              y:'r'
+            }
+          },
+          y:'e'
+        };
       });
 
       afterEach(function() {

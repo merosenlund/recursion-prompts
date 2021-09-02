@@ -262,18 +262,87 @@ var palindrome = function(string) {
 // modulo(5,2) // 1
 // modulo(17,5) // 2
 // modulo(22,6) // 4
+// Inputs:
+  // 1. Interger to be divided
+  // 2. Integer to divide by
+// Outpus:
+  // The remainder of dividing x by y
+// Constraints: None
+// Edge Cases:
+  // 1. If zero is passed in for y we want to return NaN
 var modulo = function(x, y) {
+  if (y === 0 && x === 0) {
+    return NaN;
+  }
+  var xIsNegative = false;
+  if (x < 0) {
+    x = -(x);
+    xIsNegative = true;
+  }
+  if (y < 0) {
+    y = -(y);
+  }
+  if (y > x) {
+    return xIsNegative ? -(x) : x;
+  }
+  var result = x - y;
+  if (result < y) {
+    return xIsNegative ? -(result) : result;
+  } else {
+    return modulo(result, y);
+  }
 };
 
 // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
+// Inputs:
+  // 1. Multipliee number
+  // 2. Multiplier number
+// Outputs: The result of 'Multiplying' the inputs
+// Constraints: Can't use complex math (*, /, %, or Math)
+// Edge Cases:
+  // 1. Should correctly handle negative integers
 var multiply = function(x, y) {
+  if (y === 0 || x === 0) {
+    return 0;
+  } else if (y === -1) {
+    return -(x);
+  } else if (y === 1) {
+    return x;
+  } else {
+    var newY = y < 0 ? y + 1 : y - 1;
+    var result = multiply(x, newY);
+    x = (x < 0) !== (result < 0) ? -(x) : x;
+    return result + x;
+  }
 };
 
 // 13. Write a function that divides two numbers without using the / operator or
 // Math methods to arrive at an approximate quotient (ignore decimal endings).
+// Inputs:
+  // 1. Number to be divided
+  // 2. Number to be divided by
+// Outputs: The result of 'dividing' x by y (rounded down)
+// Constraints: Do not use complex math (*, /, %, or Math)
+// Edge Cases:
+  // 1. Should correctly handle negative integers
+  // 2. Should return NaN if x and y are both zero
 var divide = function(x, y) {
+  if (x === 0 && y === 0) {
+    return NaN;
+  }
+  var absX = x < 0 ? -(x) : x;
+  var absY = y < 0 ? -(y) : y;
+  if (x === 0 || y === 0 || absY > absX) {
+    return 0;
+  }
+  var result = (x < 0) !== (y < 0) ? -1 : 1;
+  var newX = (x < 0) ? -(absX - absY) : absX - absY;
+  result += divide(newX, y)
+  return result;
 };
+
+console.log(divide(-79, 82));
 
 // 14. Find the greatest common divisor (gcd) of two positive numbers. The GCD of two
 // integers is the greatest integer that divides both x and y with no remainder.
@@ -356,7 +425,24 @@ var countValuesInObj = function(obj, value) {
 
 // 24. Find all keys in an object (and nested objects) by a provided name and rename
 // them to a provided new name while preserving the value stored at that key.
+// Inputs:
+  // 1. An obj to search through
+  // 2. An oldKey to search for
+  // 3. A newKey to replace with
+// Outputs: The changed object...
+// Constraints: Should mutate the input object
+// Edge Cases: None
 var replaceKeysInObj = function(obj, oldKey, newKey) {
+  for (var key in obj) {
+    if (typeof obj[key] === 'object') {
+      replaceKeysInObj(obj[key], oldKey, newKey);
+    }
+    if (key === oldKey) {
+      obj[newKey] = obj[oldKey];
+      delete obj[oldKey];
+    }
+  }
+  return obj;
 };
 
 // 25. Get the first n Fibonacci numbers. In the Fibonacci sequence, each subsequent
