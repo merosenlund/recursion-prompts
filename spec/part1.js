@@ -947,7 +947,9 @@
       });
 
       it('should return an array where each index is a letter of the string', function() {
-        expect(createArray('this is not a pipe')).to.eql(['t','h','i','s',' ','i','s',' ','n','o','t',' ','a',' ','p','i','p','e']);
+        var result = createArray('this is not a pipe');
+        console.log(result)
+        expect(result).to.eql(['t','h','i','s',' ','i','s',' ','n','o','t',' ','a',' ','p','i','p','e']);
         expect(createArray('hologram')).to.eql(['h','o','l','o','g','r','a','m']);
         expect(createArray('i')).to.eql(['i']);
       });
