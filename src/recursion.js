@@ -392,20 +392,12 @@ var compareStr = function(str1, str2) {
 // Constraints: Use recursion
 // Edge Cases: None
 var createArray = function(str) {
-  // Create an empty result array
   var result = [];
-  // If str length is 0
   if (str.length === 0) {
-    // Return an empty array (result)
     return result;
   }
-  // Push the first char of str to the result array
   result.push(str.slice(0, 1));
-  // Slice string and pass it into a new call to create array (Concate the return value to result)
   result = result.concat(createArray(str.slice(1)));
-  console.log(result);
-
-  // Return the result array
   return result;
 };
 
