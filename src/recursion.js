@@ -418,7 +418,22 @@ var reverseArr = function(array) {
 // 18. Create a new array with a given value and length.
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
+// Inputs: A value to fill the new array with, and the length to make the new array
+// Outputs: A new array
+// Constraints: None
+// Edge Cases: None
 var buildList = function(value, length) {
+  // Base case if length equals zero
+  if (length === 0) {
+    // Return an empty array
+    return [];
+  }
+  // Create a result array with a single value of value
+  var result = [value];
+  // Concat the result with the result of calling this function on value and length - 1
+  result = result.concat(buildList(value, length - 1));
+  // Return the result
+  return result;
 };
 
 // 19. Implement FizzBuzz. Given integer n, return an array of the string representations of 1 to n.
@@ -426,6 +441,10 @@ var buildList = function(value, length) {
 // For multiples of five, output 'Buzz' instead of the number.
 // For numbers which are multiples of both three and five, output “FizzBuzz” instead of the number.
 // fizzBuzz(5) // ['1','2','Fizz','4','Buzz']
+// Inputs: An integer
+// Outputs: An array of strings
+// Constraints: None
+// Edge Cases: None
 var fizzBuzz = function(n) {
 };
 
