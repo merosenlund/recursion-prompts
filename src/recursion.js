@@ -505,7 +505,32 @@ var rMap = function(array, callback) {
 // var obj = {'e':{'x':'y'},'t':{'r':{'e':'r'},'p':{'y':'r'}},'y':'e'};
 // countKeysInObj(obj, 'r') // 1
 // countKeysInObj(obj, 'e') // 2
+// Inputs:
+  // 1. An object to check for keys
+  // 2. The key to check for
+// Outputs: The number of times the input key occurs in the input object
+// Constraints: Use recursion
+// Edge Cases: Be able to handle nested objects
 var countKeysInObj = function(obj, key) {
+  // Create a counter variable set to zero
+  var counter = 0;
+  // Iterate over the obj
+  for (var check in obj) {
+    // If the key equals the current key
+    if (check === key) {
+      // Increment the counter
+      counter++;
+    }
+    // Get the current property
+    var current = obj[check];
+    // If the current property is an object
+    if (typeof current === 'object' && !Array.isArray(current)) {
+      // Call this function on the current property and add the return value to counter
+      counter += countKeysInObj(current, key);
+    }
+  }
+  // Return counter
+  return counter;
 };
 
 // 23. Write a function that counts the number of times a value occurs in an object.
@@ -558,7 +583,20 @@ var replaceKeysInObj = function(obj, oldKey, newKey) {
 // Example: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34.....
 // fibonacci(5); // [0,1,1,2,3,5]
 // Note: The 0 is not counted.
+// Inputs: A number
+// Outputs: An array of numbers
+// Constraints: Use recursion
+// Edge Cases: Zero and negative numbers should return null
 var fibonacci = function(n) {
+  if (n < 1) {
+    return null;
+  }
+  if (n === 1) {
+    return [0, 1];
+  }
+  var result = fibonacci(n - 1);
+  result.push(result[result.length - 1] + result[result.length - 2]);
+  return result;
 };
 
 // 26. Return the Fibonacci number located at index n of the Fibonacci sequence.
