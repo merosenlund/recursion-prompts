@@ -446,6 +446,22 @@ var buildList = function(value, length) {
 // Constraints: None
 // Edge Cases: None
 var fizzBuzz = function(n) {
+  var last = n + '';
+  if (n === 1) {
+    return [last];
+  }
+  var isDivisibleByThree = n % 3 === 0;
+  var isDivisibleByFive = n % 5 === 0;
+  if (isDivisibleByThree && isDivisibleByFive) {
+    last = 'FizzBuzz'
+  } else if (isDivisibleByThree) {
+    last = 'Fizz';
+  } else if (isDivisibleByFive) {
+    last = 'Buzz';
+  }
+  var result = fizzBuzz(n - 1);
+  result.push(last);
+  return result;
 };
 
 // 20. Count the occurrence of a value in a list.
