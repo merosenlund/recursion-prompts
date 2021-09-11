@@ -467,12 +467,38 @@ var fizzBuzz = function(n) {
 // 20. Count the occurrence of a value in a list.
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
+// Inputs: An array and a value to look for in the array
+// Outputs: A number of times the value occurs in the array
+// Constraints: Use recursion
+// Edge Cases: None
 var countOccurrence = function(array, value) {
+  // If the array length is zero
+  if (array.length === 0) {
+    // Return 0
+    return 0;
+  }
+  // Create a result variable and set it to 1 if the first element matches or zero if not
+  var result = value === array[0] ? 1 : 0;
+  // Add the result of calling this function on array with first element sliced to result
+  result += countOccurrence(array.slice(1), value);
+  // Return result
+  return result;
 };
 
 // 21. Write a recursive version of map.
 // rMap([1,2,3], timesTwo); // [2,4,6]
+// Inputs: An array to modify and a callback function
+// Outputs: A new array that has been modified by the call back function
+// Constraints: Use recursion
+// Edge Cases: None
 var rMap = function(array, callback) {
+  var result = [];
+  if (array.length === 0) {
+    return result;
+  }
+  result.push(callback(array[0]));
+  result = result.concat(rMap(array.slice(1), callback));
+  return result;
 };
 
 // 22. Write a function that counts the number of times a key occurs in an object.
