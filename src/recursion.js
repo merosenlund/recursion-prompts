@@ -604,7 +604,20 @@ var fibonacci = function(n) {
 // nthFibo(5); // 5
 // nthFibo(7); // 13
 // nthFibo(3); // 2
+// Inputs: A number
+// Output: The number found at n of the fibonacci sequence
+// Constraints: Use recursion
+// Edge Cases: Return null for negative numbers
 var nthFibo = function(n) {
+  if (n < 0) {
+    return null;
+  }
+  if (n === 0) {
+    return 0;
+  }
+  var result = fibonacci(n - 1);
+  result.push(result[result.length - 1] + result[result.length - 2]);
+  return result[result.length - 1];
 };
 
 // 27. Given an array of words, return a new array containing each word capitalized.
